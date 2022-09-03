@@ -692,7 +692,9 @@ GameObject:
   - component: {fileID: 1404526846}
   - component: {fileID: 1404526845}
   - component: {fileID: 1404526844}
+  - component: {fileID: 1404526849}
   - component: {fileID: 1404526848}
+  - component: {fileID: 1404526850}
   m_Layer: 0
   m_Name: Zombie
   m_TagString: Untagged
@@ -791,6 +793,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRef: {fileID: 0}
+  canSeePlayer: 0
   radius: 15
   angle: 170
   targetMask:
@@ -799,4 +802,79 @@ MonoBehaviour:
   obstructionMask:
     serializedVersion: 2
     m_Bits: 64
-  canSeePlayer: 0
+--- !u!114 &1404526849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404526843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e76ddb50a1bc9424a8e37283f620b8b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visionMinimumAwareness: 1
+  visionAwarenessBuildRate: 10
+  hearingMinimumAwareness: 0
+  hearingAwarenessBuildRate: 5
+  proximityMinimumAwareness: 0
+  proximityAwarenessBuildRate: 1
+  awarenessDecayDelay: 0.1
+  awarenessDecayRate: 0.1
+--- !u!114 &1404526850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404526843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e08f228e54ee1f842bbb410c17f8af47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hearRange: 10
+--- !u!1 &1736473317
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1736473319}
+  - component: {fileID: 1736473318}
+  m_Layer: 0
+  m_Name: HearingSensorsManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1736473318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736473317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 040e55b36b85a8b448f07c847d942a64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1736473319
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736473317}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 0.027999997}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
