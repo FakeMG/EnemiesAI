@@ -15,8 +15,8 @@ public class EnemyVisonSensor : MonoBehaviour {
     [SerializeField] private LayerMask obstructionMask;
 
     [Header("Awareness Parameter")]
-    //[SerializeField] private float visionMinimumAwareness = 1f;
-    [SerializeField] private float visionAwarenessBuildRate = 10f;
+    [SerializeField] private float visionMinimumAwareness = 1.5f;
+    [SerializeField] private float visionAwarenessBuildRate = 30f;
 
     private EnemyAwareness enemyAwareness;
 
@@ -49,15 +49,21 @@ public class EnemyVisonSensor : MonoBehaviour {
                         canSeePlayer = true;
 
                         float awareness = CalculateAwareness(directionToTarget);
-                        enemyAwareness.UpdateAwarenessAbout(target.gameObject, awareness);
+                        enemyAwareness.UpdateAwarenessAbout(target.gameObject, visionMinimumAwareness, awareness);
+                    } else {
+                        canSeePlayer = false;
                     }
+                } else {
+                    canSeePlayer = false;
                 }
             }
+        } else {
+            canSeePlayer = false;
         }
     }
 
     private float CalculateAwareness(Vector3 directionToTarget) {
-        float dot = Vector3.Dot(Vector3.forward, directionToTarget);
+        float dot = Vector3.Dot(transform.forward, directionToTarget);
         return dot * visionAwarenessBuildRate * Time.deltaTime;
     }
 }

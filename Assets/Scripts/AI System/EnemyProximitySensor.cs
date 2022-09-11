@@ -9,7 +9,7 @@ public class EnemyProximitySensor : MonoBehaviour {
     [SerializeField] private LayerMask obstructionMask;
 
     [Header("Awareness Parameter")]
-    //[SerializeField] private float proximityMinimumAwareness = 0f;
+    [SerializeField] private float proximityMinimumAwareness = 1f;
     [SerializeField] private float proximityAwarenessBuildRate = 20f;
 
     private EnemyAwareness enemyAwareness;
@@ -39,7 +39,7 @@ public class EnemyProximitySensor : MonoBehaviour {
 
                 if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask)) {
                     float awareness = proximityAwarenessBuildRate * Time.deltaTime;
-                    enemyAwareness.UpdateAwarenessAbout(target.gameObject, awareness);
+                    enemyAwareness.UpdateAwarenessAbout(target.gameObject, proximityMinimumAwareness, awareness);
                 }
             }
         }

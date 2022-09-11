@@ -6,13 +6,14 @@ public class EnemyAwareness : MonoBehaviour {
     [SerializeField] float awarenessDecayDelay = 1f;
     [SerializeField] float awarenessDecayRate = 0.1f;
 
-    private Dictionary<GameObject, TrackedTarget> targets = new Dictionary<GameObject, TrackedTarget>();
+    public Dictionary<GameObject, TrackedTarget> targets { get; private set; } = new Dictionary<GameObject, TrackedTarget>();
 
     private void Update() {
         List<GameObject> toCleanup = new List<GameObject>();
 
         foreach (var target in targets.Keys) {
             targets[target].DecayAwareness(awarenessDecayDelay, awarenessDecayRate * Time.deltaTime);
+
             if (targets[target].AwarenessOfThisTarget <= 0f) {
                 toCleanup.Add(target);
             }
@@ -24,23 +25,23 @@ public class EnemyAwareness : MonoBehaviour {
         }
     }
 
-    public void UpdateAwarenessAbout(GameObject targetGameObject, float awareness) {
+    public void UpdateAwarenessAbout(GameObject targetGameObject, float minimumAwareness, float addedAwareness) {
         if (!targets.ContainsKey(targetGameObject)) {
             targets[targetGameObject] = new TrackedTarget();
         }
-        targets[targetGameObject].UpdateTarget(targetGameObject, awareness);
+        targets[targetGameObject].UpdateTarget(targetGameObject, minimumAwareness, addedAwareness);
     }
 }
 
-class TrackedTarget {
-    private Vector3 position;
+public class TrackedTarget {
+    public Vector3 Posittion { get; private set; }
     private float lastSensedTime = -1f;
     public float AwarenessOfThisTarget { get; private set; }
 
-    public void UpdateTarget(GameObject targetGameObject, float awareness) {
-        position = targetGameObject.transform.position;
+    public void UpdateTarget(GameObject targetGameObject, float minimumAwareness, float addedAwareness) {
+        Posittion = targetGameObject.transform.position;
         lastSensedTime = Time.time;
-        AwarenessOfThisTarget = Mathf.Clamp(AwarenessOfThisTarget + awareness, 0f, 2f);
+        AwarenessOfThisTarget = Mathf.Clamp(AwarenessOfThisTarget + addedAwareness, minimumAwareness, 2f);
     }
 
     public void DecayAwareness(float decayDelayTime, float amount) {

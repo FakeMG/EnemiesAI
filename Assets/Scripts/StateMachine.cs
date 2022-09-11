@@ -45,15 +45,6 @@ public class StateMachine {
         _anyTransitions.Add(new Transition(state, predicate));
     }
 
-    private class Transition {
-        public Func<bool> Condition { get; }
-        public IState To { get; }
-
-        public Transition(IState to, Func<bool> condition) {
-            To = to;
-            Condition = condition;
-        }
-    }
 
     private Transition GetTransition() {
         foreach (var transition in _anyTransitions)
@@ -65,5 +56,15 @@ public class StateMachine {
                 return transition;
 
         return null;
+    }
+
+    private class Transition {
+        public Func<bool> Condition { get; }
+        public IState To { get; }
+
+        public Transition(IState to, Func<bool> condition) {
+            To = to;
+            Condition = condition;
+        }
     }
 }

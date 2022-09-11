@@ -3,7 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(EnemyAwareness))]
 public class EnemyHearingSensor : MonoBehaviour {
 
-    //[SerializeField] private float hearingMinimumAwareness = 0f;
+    [SerializeField] private float hearingMinimumAwareness = 0f;
     [SerializeField] private float hearingAwarenessBuildRate = 5f;
     [SerializeField] private float hearRange = 5f;
 
@@ -20,7 +20,7 @@ public class EnemyHearingSensor : MonoBehaviour {
         }
 
         float awareness = CalculateAwareness(targetGameObject.transform.position, originalIntensity);
-        enemyAwareness.UpdateAwarenessAbout(targetGameObject, awareness);
+        enemyAwareness.UpdateAwarenessAbout(targetGameObject, hearingMinimumAwareness, awareness);
     }
 
     private float CalculateAwareness(Vector3 targetPos, float originalIntensity) {
