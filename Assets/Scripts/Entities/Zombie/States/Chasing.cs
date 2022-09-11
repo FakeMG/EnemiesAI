@@ -6,7 +6,7 @@ public class Chasing : IState {
     private NavMeshAgent _navMeshAgent;
     private EnemyAwareness _awarenessSystem;
 
-    private float _chasingSpeed = 2f;
+    private float _chasingSpeed = 3f;
 
     public Chasing(Zombie zombie, NavMeshAgent navMeshAgent, EnemyAwareness awarenessSystem) {
         _zombie = zombie;
